@@ -4,7 +4,7 @@ import { Transport, ClientProxy,ClientProxyFactory } from '@nestjs/microservices
 
 
 @Injectable()
-export class ApiService {
+export class ProductService {
     private client: ClientProxy;
 
     constructor(){
@@ -16,18 +16,17 @@ export class ApiService {
         }
       })
     }
-  public createProduct(data){
-    console.log(data)
-    const obj=this.client.send('products/',data);
-    
-    console.log(obj)
-    return obj;
+  async createProduct(data){
+    return await this.client.send('add',data);
   }
-  public getallProducts(){
-    console.log('obj')
-    return this.client.send<any>('products/',[]);
+  async getallProducts(){
+    return await this.client.send('all',{});
 
   }
+  async findproductByName(data){
+    return await this.client.send('find',data);
+  }
+    
 }
 
 
