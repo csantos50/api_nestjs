@@ -22,15 +22,14 @@ export class ApiController {
     @Get('cart/:id')
     async getCart(@Param('id') id: string  ) {
         let cart;
-        cart= await this.cartService.getCart(id);
+        cart=  await this.cartService.getCart(id);
 
         if (!cart) {
             return new NotFoundException('Cart not find.');
         }
         const cartDetails= await this.cartService.getCartDetail(id);
-        cart['product']=cartDetails;
-        return cart;
-        ;
+        
+        return cartDetails;
     }
 
 
@@ -70,6 +69,7 @@ export class ApiController {
         const obj= await this.cartService.addProductToCart(data)
         return obj;
     }
+
     @Post('cart/remove')
     async remove_ProductToCart(
         @Body('product_name') product_name: string,

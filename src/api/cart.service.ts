@@ -17,7 +17,6 @@ export class CartService {
       })
     }
   async getCartDetail(data){
-    console.log(data)
     return await this.client.send('cart',data);
   }
   async getCart(data){
